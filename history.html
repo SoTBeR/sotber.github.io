@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <title>история сообщений</title>
+
+    <style>
+        body {
+            margin: 5;
+            padding: 0;
+            color: var(--tg-theme-text-color);
+            background-color: var(--tg-theme-bg-color);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+
+						font-family: 'Russo One';
+						font-style: normal;
+						text-decoration: none;
+						font-size: 1em;
+						color: var(--second_color);
+        }
+
+				*,
+				*:before,
+				*:after {
+						box-sizing: border-box;
+				}
+
+        .message-container {
+            width: 80%;
+            max-width: 800px;
+        }
+        .message {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+			max-width: 75%;
+            clear: both;
+            position: relative;
+
+            border: 2px solid var(--tg-theme-secondary-bg-color);
+            border-radius: 20px;
+
+            color: var(--tg-theme-secondary-bg-color);
+        }
+        .user1 {
+            float: right;
+        }
+        .user2 {
+            float: left;
+        }
+        .message:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+        .user1:before {
+            border-width: 0 25px 25px 0;
+            border-color: transparent #3498db transparent transparent;
+            right: 0px;
+            bottom: -5px;
+						opacity: 0.5;
+						z-index: -1;
+        }
+        .user2:before {
+            border-width: 0 0 25px 25px ;
+            border-color: transparent transparent transparent #2980b9;
+            left: 0px;
+            bottom: -5px;
+						opacity: 0.5;
+						z-index: -1;
+        }
+
+				::-webkit-scrollbar {
+					width: 2px;
+				}
+
+				::-webkit-scrollbar-track {
+					background: #222222;
+					box-shadow: 0 0 2px rgba(0, 0, 0, .2) inset;
+				}
+
+				::-webkit-scrollbar-thumb {
+					background: #222222;
+					border-radius: 8px;
+					border: 1px solid #2980b9;
+				}
+
+				::-webkit-scrollbar-thumb:hover {
+					background: #222222;
+				}
+    </style>
+</head>
+<body>
+	<div class="message-container">
+		<div class="message user1">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+
+		<div class="message user2">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+		
+		<div class="message user1">
+				<div class="message-content">
+						Кто ты?
+				</div>
+		</div>
+
+		<div class="message user2">
+			<div class="message-content">
+					Кто ты?
+			</div>
+	</div>
+
+	<div class="message user1">
+				<div class="message-content">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum earum esse magnam consequuntur, perferendis nisi quasi, voluptas ipsam error labore minus eos facilis nemo corporis doloremque blanditiis sed amet fugiat!
+				</div>
+		</div>
+
+		<div class="message user2">
+				<div class="message-content">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, ipsa quibusdam eius fugiat quis nostrum molestiae odit ducimus ea illo culpa, in aliquid. Repudiandae dolor quod itaque voluptates, praesentium doloremque!
+				</div>
+		</div>
+		
+		<div class="message user1">
+				<div class="message-content">
+						Кто ты?
+				</div>
+		</div>
+
+		<div class="message user2">
+			<div class="message-content">
+					Кто ты?
+			</div>
+	</div>
+
+	<div class="message user1">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+
+		<div class="message user2">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+		
+		<div class="message user1">
+				<div class="message-content">
+						Кто ты?
+				</div>
+		</div>
+
+		<div class="message user2">
+			<div class="message-content">
+					Кто ты?
+			</div>
+	</div>
+
+	<div class="message user1">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+
+		<div class="message user2">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+		
+		<div class="message user1">
+				<div class="message-content">
+						Кто ты?
+				</div>
+		</div>
+
+		<div class="message user2">
+			<div class="message-content">
+					Кто ты?
+			</div>
+	</div>
+
+	<div class="message user1">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+
+		<div class="message user2">
+				<div class="message-content">
+						Привет!
+				</div>
+		</div>
+		
+		<div class="message user1">
+				<div class="message-content">
+						Кто ты?
+				</div>
+		</div>
+
+		<div class="message user2">
+			<div class="message-content">
+					Кто ты?
+			</div>
+	</div>
+		<!-- Add more messages as needed -->
+	</div>
+</body>
+</html>

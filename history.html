@@ -157,33 +157,9 @@
 			background: var(--tg-theme-bg-color);
 		}
     </style>
-</head>
-<body>
-	<div class="message-container" id="message-container">
-		<!-- <div class="message user">
-			<div class="message-content">
-					Привет!
-			</div>
-		</div>
 
-		<div class="message bot">
-			<div class="message-content">
-				Привет, first_name last_name!
-			</div>
-		</div> -->
-	</div>
-
-	<script>
-		let tg = window.Telegram.WebApp;
-
-		let initData = tg.initData;
-		let initDataUnsafe = tg.initDataUnsafe;
-
-		let user_id = initDataUnsafe.user.id;
-
-		document.getElementById("test_1").value = "Привет, " + initDataUnsafe.first_name + "" + initDataUnsafe.last_name + "!"
-
-		var request = new XMLHttpRequest();
+		<script>
+			var request = new XMLHttpRequest();
 		var url = `https://37.220.81.184:5430/query?id=${user_id}`;
 
 		// request.open("GET", url, true);
@@ -240,6 +216,32 @@
 			.catch((error) => {
 				console.error(`Произошла ошибка: ${error.message}`);
 			});
+		</script>
+</head>
+<body>
+	<div class="message-container" id="message-container">
+		<!-- <div class="message user">
+			<div class="message-content">
+					Привет!
+			</div>
+		</div>
+
+		<div class="message bot">
+			<div class="message-content">
+				Привет, first_name last_name!
+			</div>
+		</div> -->
+	</div>
+
+	<script>
+		let tg = window.Telegram.WebApp;
+
+		let initData = tg.initData;
+		let initDataUnsafe = tg.initDataUnsafe;
+
+		let user_id = initDataUnsafe.user.id;
+
+		document.getElementById("test_1").value = "Привет, " + initDataUnsafe.first_name + "" + initDataUnsafe.last_name + "!"
 	  </script>
 </body>
 </html>

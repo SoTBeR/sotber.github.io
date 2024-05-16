@@ -1,11 +1,69 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Запрос к серверу</title>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="result"></div>
+
+  <script>
+    var request = new XMLHttpRequest();
+		var url = "http://37.220.81.184:5430/query?id=1448724522";
+		
+		// request.open("GET", url, true);
+		
+		// console.log(request);
+
+		// request.onload = function () {
+		// 	document.getElementById("result").value = request.response;
+		// };
+
+		// request.send();
+
+		axios.get(url)
+			.then((response) => {
+				var data = JSON.parse(response.request.response);
+				var container = document.getElementById("result");
+
+				// console.log(response.request.response);
+
+				var messages = data[0].user_messages; // Получаем сообщения пользователя из данных
+				var aiMessages = data[0].ai_response_messages; // Получаем сообщения бота из данных
+
+				for (var i = 0; i < messages.length; i++) {
+					var userMessageElement = document.createElement("div");
+					userMessageElement.innerText = messages[i];
+					userMessageElement.className = "user-message";
+					container.appendChild(userMessageElement);
+
+					// Проверяем, есть ли соответствующее сообщение бота
+					if (aiMessages.length > i) {
+						var aiMessageElement = document.createElement("div");
+						aiMessageElement.innerText = aiMessages[i].replace(/^[0-9]+#\$%/, ""); // Убираем префикс из сообщения бота
+						aiMessageElement.className = "ai-message";
+						container.appendChild(aiMessageElement);
+					}
+				}
+			})
+			.catch((error) => {
+				console.error(`Произошла ошибка: ${error.message}`);
+			});
+  </script>
+</body>
+</html> -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <title>История сообщений</title>
+    <title>История сообщений https://t.me/CAIS_Public_bot?attach=botusername</title>
 
     <style>
         body {
@@ -49,10 +107,10 @@
 
             color: var(--tg-theme-text-color);
         }
-        .user1 {
+        .user {
             float: right;
         }
-        .user2 {
+        .bot {
             float: left;
         }
         .message:before {
@@ -63,7 +121,7 @@
             border-style: solid;
         }
 
-        .user1:before {
+        .user:before {
             border-width: 0 25px 25px 0;
             border-color: transparent var(--tg-theme-text-color) transparent transparent;
             right: -1px;
@@ -71,7 +129,7 @@
 			/* opacity: 0.5; */
 			z-index: -1;
         }
-        .user2:before {
+        .bot:before {
             border-width: 0 0 25px 25px;
             border-color: transparent transparent transparent var(--tg-theme-text-color);
             left: -1px;
@@ -101,44 +159,87 @@
     </style>
 </head>
 <body>
-	<div class="message-container">
-		<div class="message user1">
-				<div class="message-content">
-						Привет!
-				</div>
-		</div>
-
-		<div class="message user2">
-				<div class="message-content">
-						Привет!
-				</div>
-		</div>
-		
-		<div class="message user1">
-				<div class="message-content">
-						Кто ты?
-				</div>
-		</div>
-
-		<div class="message user2">
+	<div class="message-container" id="message-container">
+		<!-- <div class="message user">
 			<div class="message-content">
-					Кто ты?
+					Привет!
 			</div>
-	</div>
-
-	<div class="message user1">
-				<div class="message-content">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum earum esse magnam consequuntur, perferendis nisi quasi, voluptas ipsam error labore minus eos facilis nemo corporis doloremque blanditiis sed amet fugiat!
-				</div>
 		</div>
 
-		<div class="message user2">
-				<div class="message-content">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, ipsa quibusdam eius fugiat quis nostrum molestiae odit ducimus ea illo culpa, in aliquid. Repudiandae dolor quod itaque voluptates, praesentium doloremque!
-				</div>
-		</div>
+		<div class="message bot">
+			<div class="message-content">
+				Привет, first_name last_name!
+			</div>
+		</div> -->
 	</div>
-		<!-- Add more messages as needed -->
-	</div>
+
+	<script>
+		let tg = window.Telegram.WebApp;
+
+		let initData = tg.initData;
+		let initDataUnsafe = tg.initDataUnsafe;
+
+		document.getElementById("test_1").value = "Привет, " + initDataUnsafe.first_name + "" + initDataUnsafe.last_name + "!"
+	</script>
+
+	<script>
+		var request = new XMLHttpRequest();
+		var url = "https://37.220.81.184:5430/query?id=1448724522";
+
+		// request.open("GET", url, true);
+
+		// console.log(request);
+
+		// request.onload = function () {
+		// 	document.getElementById("result").value = request.response;
+		// };
+
+		// request.send();
+
+		axios.get(url)
+			.then((response) => {
+				var data = JSON.parse(response.request.response);
+				var container = document.getElementById("message-container");
+
+				console.log(container);
+
+				// console.log(response.request.response);
+
+				var messages = data[0].user_messages;
+				var aiMessages = data[0].ai_response_messages;
+
+				for (var i = 0; i < messages.length; i++) {
+					var userMessageElement = document.createElement("div")
+					userMessageElement.className = "message user"
+
+					var userMessageElementContent = document.createElement("div");
+					userMessageElementContent.innerText = messages[i];
+					userMessageElementContent.className = "message-content";
+					
+					userMessageElement.appendChild(userMessageElementContent);
+					container.appendChild(userMessageElement);
+
+					if (aiMessages.length > i) {
+						var botMessageElement = document.createElement("div")
+						botMessageElement.className = "message bot"
+
+						var botMessageElementContent = document.createElement("div");
+						botMessageElementContent.innerText = aiMessages[i];
+						botMessageElementContent.className = "message-content";
+						
+						botMessageElement.appendChild(botMessageElementContent);
+						container.appendChild(botMessageElement);
+						
+						// var aiMessageElement = document.createElement("div");
+						// aiMessageElement.innerText = aiMessages[i].replace(/^[0-9]+#\$%/, ""); // Убираем префикс из сообщения бота
+						// aiMessageElement.className = "message bot";
+						// container.appendChild(aiMessageElement);
+					}
+				}
+			})
+			.catch((error) => {
+				console.error(`Произошла ошибка: ${error.message}`);
+			});
+	  </script>
 </body>
 </html>

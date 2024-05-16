@@ -171,92 +171,6 @@
 				Привет, first_name last_name!
 			</div>
 		</div> -->
-
-<div calss="message user">
-  <div class="message-content">
-    Как посмотреть историю запросов к базе данных PostgreSQL через консоль?
-1#$%Чтобы просмотреть историю запросов к базе данных PostgreSQL через консоль, вы можете воспользоваться утилитой `pgBadger` или использовать встроенный журнал (`log`) PostgreSQL.
-
-1. Используя pgBadger:
-- Установите pgBadger на свой компьютер.
-- Подключитесь к своей базе данных PostgreSQL через консоль.
-- Запустите команду для записи журнала в файл:
-```
-ALTER SYSTEM SET log_destination = "csvlog";
-ALTER SYSTEM SET logging_collector = on;
-ALTER SYSTEM SET log_directory = "pg_log";
-ALTER SYSTEM SET log_filename = "postgresql-%Y-%m-%d_%H%M%S.log";
-ALTER SYSTEM SET log_statement = "all";
-```
-- Перезапустите сервер PostgreSQL.
-- Выполните запросы к базе данных.
-- После выполнения запросов, запустите pgBadger, указав путь к журнальному файлу, чтобы создать отчет:
-```
-pgbadger /path/to/postgresql-X.log
-```
-- Откройте созданный отчет в браузере, чтобы просмотреть историю запросов.
-
-2. Использование встроенного журнала:
-- Откройте файл `postgresql.conf`, обычно он находится в каталоге `/etc/postgresql/⟨version⟩/main/`.
-- Найдите и измените или добавьте следующие параметры:
-```
-log_statement = "all"
-logging_collector = on
-log_directory = "pg_log"
-log_filename = "postgresql-%Y-%m-%d_%H%M%S.log"
-```
-- Перезапустите сервер PostgreSQL.
-- Выполните запросы к базе данных.
-- Журнальные файлы будут сохранены в каталоге `pg_log`.
-- Вы можете открыть соответствующий файл журнала с помощью команды `less` или любого другого текстового редактора, чтобы просмотреть историю запросов.
-
-Обратите внимание, что использование журнала запросов может повлиять на производительность сервера PostgreSQL, поэтому рекомендуется активировать его только при необходимости.
-А как посмотреть историю подключения к порту сервера Ubuntu 20?
-2#$%Чтобы просмотреть историю подключений к порту сервера Ubuntu 20, вы можете использовать утилиту `ss` (Socket Statistics) или команду `netstat`. Вот примеры:
-
-Используя `ss`:
-
-1. Откройте терминал на сервере Ubuntu 20.
-2. Выполните следующую команду для просмотра активных подключений к порту:
-```
-ss -ntlp sport = ⟨порт⟩
-```
-Замените `⟨порт⟩` на конкретный номер порта, к которому вы хотите просмотреть историю подключений. Например, 80 для HTTP или 22 для SSH.
-3. Вы увидите активные подключения к указанному порту на сервере.
-
-Используя `netstat`:
-
-1. Откройте терминал на сервере Ubuntu 20.
-2. Выполните следующую команду для просмотра активных подключений к порту:
-```
-netstat -ntlp | grep ⟨порт⟩
-```
-Замените `⟨порт⟩` на конкретный номер порта, к которому вы хотите просмотреть историю подключений. Например, 80 для HTTP или 22 для SSH.
-3. Вы увидите активные подключения к указанному порту на сервере.
-
-Обратите внимание, что для выполнения команд `ss` или `netstat` может потребоваться использование привилегий суперпользователя. Если у вас нет достаточных прав, добавьте `sudo` перед каждой командой для выполнения команд с правами суперпользователя.
-Мне нужно посмотреть историю подключений
-3#$%Для просмотра истории подключений к серверу Ubuntu 20 вы можете использовать журналы системы или логи SSH. Вот несколько способов:
-
-1. Журналы системы:
-- Откройте терминал на сервере Ubuntu 20.
-- Чтобы просмотреть историю подключений через SSH, выполните команду:
-```
-cat /var/log/auth.log | grep sshd
-```
-- Вы увидите список записей журнала, относящихся к подключениям через SSH.
-
-2. Логи SSH:
-- Откройте терминал на сервере Ubuntu 20.
-- Чтобы просмотреть историю подключений через SSH, выполните команду:
-```
-cat /var/log/secure | grep sshd
-```
-- Это предполагает, что на вашем сервере используется файл логов `/var/log/secure` для записи информации о подключениях SSH. Если файл называется иначе, замените путь и имя файла в команде.
-
-Обратите внимание, что для просмотра логов системы или логов SSH может потребоваться использование привилегий суперпользователя. Если у вас нет достаточных прав, добавьте `sudo` перед каждой командой, чтобы выполнить их с правами суперпользователя.
-</div>
-</div>
 	</div>
 
 	<script>
@@ -267,8 +181,8 @@ cat /var/log/secure | grep sshd
 
 		//let user_id = initDataUnsafe.user;
 
-		// var request = new XMLHttpRequest();
-		// var url = `https://37.220.81.184:5430/query?id=1448724522`; //${user_id}
+		var request = new XMLHttpRequest();
+		var url = `https://37.220.81.184:5430/query?id=1448724522`; //${user_id}
 
 		// request.open("GET", url, true);
 
@@ -279,6 +193,57 @@ cat /var/log/secure | grep sshd
 		// };
 
 		// request.send();
+
+		axios.get(url)
+			.then((response) => {
+				var data = JSON.parse(response.request.response);
+				var container = document.getElementById("message-container")
+				
+				console.log(data);
+
+				console.log(container);
+
+				// console.log(response.request.response);
+
+				var data = [{"user_messages":["Как посмотреть историю запросов к базе данных PostgreSQL через консоль?","А как посмотреть историю подключения к порту сервера Ubuntu 20?","Мне нужно посмотреть историю подключений"],"ai_response_messages":["1#$%Чтобы просмотреть историю запросов к базе данных PostgreSQL через консоль, вы можете воспользоваться утилитой `pgBadger` или использовать встроенный журнал (`log`) PostgreSQL.\n\n1. Используя pgBadger:\n   - Установите pgBadger на свой компьютер.\n   - Подключитесь к своей базе данных PostgreSQL через консоль.\n   - Запустите команду для записи журнала в файл:\n     ```\n     ALTER SYSTEM SET log_destination = \"csvlog\";\n     ALTER SYSTEM SET logging_collector = on;\n     ALTER SYSTEM SET log_directory = \"pg_log\";\n     ALTER SYSTEM SET log_filename = \"postgresql-%Y-%m-%d_%H%M%S.log\";\n     ALTER SYSTEM SET log_statement = \"all\";\n     ```\n   - Перезапустите сервер PostgreSQL.\n   - Выполните запросы к базе данных.\n   - После выполнения запросов, запустите pgBadger, указав путь к журнальному файлу, чтобы создать отчет:\n     ```\n     pgbadger /path/to/postgresql-X.log\n     ```\n   - Откройте созданный отчет в браузере, чтобы просмотреть историю запросов.\n\n2. Использование встроенного журнала:\n   - Откройте файл `postgresql.conf`, обычно он находится в каталоге `/etc/postgresql/⟨version⟩/main/`.\n   - Найдите и измените или добавьте следующие параметры:\n     ```\n     log_statement = \"all\"\n     logging_collector = on\n     log_directory = \"pg_log\"\n     log_filename = \"postgresql-%Y-%m-%d_%H%M%S.log\"\n     ```\n   - Перезапустите сервер PostgreSQL.\n   - Выполните запросы к базе данных.\n   - Журнальные файлы будут сохранены в каталоге `pg_log`.\n   - Вы можете открыть соответствующий файл журнала с помощью команды `less` или любого другого текстового редактора, чтобы просмотреть историю запросов.\n\nОбратите внимание, что использование журнала запросов может повлиять на производительность сервера PostgreSQL, поэтому рекомендуется активировать его только при необходимости.","2#$%Чтобы просмотреть историю подключений к порту сервера Ubuntu 20, вы можете использовать утилиту `ss` (Socket Statistics) или команду `netstat`. Вот примеры:\n\nИспользуя `ss`:\n\n1. Откройте терминал на сервере Ubuntu 20.\n2. Выполните следующую команду для просмотра активных подключений к порту:\n   ```\n   ss -ntlp sport = ⟨порт⟩\n   ```\n   Замените `⟨порт⟩` на конкретный номер порта, к которому вы хотите просмотреть историю подключений. Например, 80 для HTTP или 22 для SSH.\n3. Вы увидите активные подключения к указанному порту на сервере.\n\nИспользуя `netstat`:\n\n1. Откройте терминал на сервере Ubuntu 20.\n2. Выполните следующую команду для просмотра активных подключений к порту:\n   ```\n   netstat -ntlp | grep ⟨порт⟩\n   ```\n   Замените `⟨порт⟩` на конкретный номер порта, к которому вы хотите просмотреть историю подключений. Например, 80 для HTTP или 22 для SSH.\n3. Вы увидите активные подключения к указанному порту на сервере.\n\nОбратите внимание, что для выполнения команд `ss` или `netstat` может потребоваться использование привилегий суперпользователя. Если у вас нет достаточных прав, добавьте `sudo` перед каждой командой для выполнения команд с правами суперпользователя.","3#$%Для просмотра истории подключений к серверу Ubuntu 20 вы можете использовать журналы системы или логи SSH. Вот несколько способов:\n\n1. Журналы системы:\n   - Откройте терминал на сервере Ubuntu 20.\n   - Чтобы просмотреть историю подключений через SSH, выполните команду:\n     ```\n     cat /var/log/auth.log | grep sshd\n     ```\n   - Вы увидите список записей журнала, относящихся к подключениям через SSH.\n\n2. Логи SSH:\n   - Откройте терминал на сервере Ubuntu 20.\n   - Чтобы просмотреть историю подключений через SSH, выполните команду:\n     ```\n     cat /var/log/secure | grep sshd\n     ```\n   - Это предполагает, что на вашем сервере используется файл логов `/var/log/secure` для записи информации о подключениях SSH. Если файл называется иначе, замените путь и имя файла в команде.\n\nОбратите внимание, что для просмотра логов системы или логов SSH может потребоваться использование привилегий суперпользователя. Если у вас нет достаточных прав, добавьте `sudo` перед каждой командой, чтобы выполнить их с правами суперпользователя."]}]);
+
+				console.log(data);
+
+				var messages = data[0].user_messages;
+				var aiMessages = data[0].ai_response_messages;
+
+				for (var i = 0; i < messages.length; i++) {
+					var userMessageElement = document.createElement("div")
+					userMessageElement.className = "message user"
+
+					var userMessageElementContent = document.createElement("div");
+					userMessageElementContent.innerText = messages[i];
+					userMessageElementContent.className = "message-content";
+					
+					userMessageElement.appendChild(userMessageElementContent);
+					container.appendChild(userMessageElement);
+
+					if (aiMessages.length > i) {
+						var botMessageElement = document.createElement("div")
+						botMessageElement.className = "message bot"
+
+						var botMessageElementContent = document.createElement("div");
+						botMessageElementContent.innerText = aiMessages[i];
+						botMessageElementContent.className = "message-content";
+						
+						botMessageElement.appendChild(botMessageElementContent);
+						container.appendChild(botMessageElement);
+						
+						// var aiMessageElement = document.createElement("div");
+						// aiMessageElement.innerText = aiMessages[i].replace(/^[0-9]+#\$%/, ""); // Убираем префикс из сообщения бота
+						// aiMessageElement.className = "message bot";
+						// container.appendChild(aiMessageElement);
+					}
+				}
+			})
+			.catch((error) => {
+				console.error(`Произошла ошибка: ${error.message}`);
+			});
 	  </script>
 </body>
 </html>

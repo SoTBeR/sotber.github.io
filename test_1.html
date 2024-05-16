@@ -1,69 +1,12 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Запрос к серверу</title>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-  <div id="result"></div>
-
-  <script>
-    var request = new XMLHttpRequest();
-		var url = "http://37.220.81.184:5430/query?id=1448724522";
-		
-		// request.open("GET", url, true);
-		
-		// console.log(request);
-
-		// request.onload = function () {
-		// 	document.getElementById("result").value = request.response;
-		// };
-
-		// request.send();
-
-		axios.get(url)
-			.then((response) => {
-				var data = JSON.parse(response.request.response);
-				var container = document.getElementById("result");
-
-				// console.log(response.request.response);
-
-				var messages = data[0].user_messages; // Получаем сообщения пользователя из данных
-				var aiMessages = data[0].ai_response_messages; // Получаем сообщения бота из данных
-
-				for (var i = 0; i < messages.length; i++) {
-					var userMessageElement = document.createElement("div");
-					userMessageElement.innerText = messages[i];
-					userMessageElement.className = "user-message";
-					container.appendChild(userMessageElement);
-
-					// Проверяем, есть ли соответствующее сообщение бота
-					if (aiMessages.length > i) {
-						var aiMessageElement = document.createElement("div");
-						aiMessageElement.innerText = aiMessages[i].replace(/^[0-9]+#\$%/, ""); // Убираем префикс из сообщения бота
-						aiMessageElement.className = "ai-message";
-						container.appendChild(aiMessageElement);
-					}
-				}
-			})
-			.catch((error) => {
-				console.error(`Произошла ошибка: ${error.message}`);
-			});
-  </script>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-		<script src="https://telegram.org/js/telegram-web-app.js"></script>
+		<script src="httpss://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+		<script src="httpss://telegram.org/js/telegram-web-app.js"></script>
 
-    <title>История сообщений https://t.me/CAIS_Public_bot?attach=botusername</title>
+    <title>История сообщений httpss://t.me/CAIS_Public_bot?attach=botusername</title>
 
     <style>
         body {
@@ -167,7 +110,7 @@
 	//let user_id = initDataUnsafe.user;
 
 	var request = new XMLHttpRequest();
-	var url = `https://37.220.81.184:5430/query?id=1448724522`; //${user_id}
+	var url = `httpss://37.220.81.184:5430/query?id=1448724522`; //${user_id}
 
 	// request.open("GET", url, true);
 
